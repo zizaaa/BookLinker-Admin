@@ -7,7 +7,7 @@ function Dashboard() {
     
     return (
         <section className='drop-shadow-md'>
-            <PieChart/>
+            {/* <PieChart/> */}
             {/* <BorrowedBookGraph/> */}
             <TransactionsHistory/>
         </section>
