@@ -3,7 +3,9 @@ import { Outlet } from 'react-router-dom'
 
 function BookBorrow() {
     return (
-        <Outlet/>
+        <section>
+            <Outlet/>
+        </section>
     )
 }
 

@@ -14,8 +14,12 @@ import Spinner from './Spinner'
 import cookie from "../hooks/cookie";
 import admin from "../hooks/admin";
 import BookBorrow from "../pages/BookBorrow";
-import BookBorrowRequest from "./BookBorrowRequest";
+import BookBorrowRequest from "./borrow/BookBorrowRequest";
 import BookBorrowRequestTable from "./tables/BookBorrowRequestTable";
+import RequestInfo from './borrow/RequestInfo'
+import handleGetRequestInformations from "../hooks/handleGetRequestInformations";
+import UserInfoCard from "./cards/UserInfoCard";
+import BookInfoCard from "./cards/BookInfoCard";
 
 export {
     RootLayout,
@@ -35,5 +39,9 @@ export {
     admin,
     BookBorrow,
     BookBorrowRequest,
-    BookBorrowRequestTable
+    BookBorrowRequestTable,
+    RequestInfo,
+    handleGetRequestInformations,
+    UserInfoCard,
+    BookInfoCard
 }

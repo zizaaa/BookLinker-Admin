@@ -8,7 +8,8 @@ import {
         authenticate, 
         LogedIn, 
         BookBorrow, 
-        BookBorrowRequest 
+        BookBorrowRequest ,
+        RequestInfo
     } from "../components/linkImports";
 
 export const router = createBrowserRouter([
@@ -36,6 +37,10 @@ export const router = createBrowserRouter([
                         path:'/book-borrow/request',
                         element:<BookBorrowRequest/>
                     },
+                    {
+                        path:'/book-borrow/request/:collectionID/:borrowerID/:requestID',
+                        element:<RequestInfo/>
+                    }
                 ]
             },
         ]
