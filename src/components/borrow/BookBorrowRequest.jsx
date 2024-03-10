@@ -4,7 +4,9 @@ import { BookBorrowRequestTable, axios, cookie } from '../linkImports'
 function BookBorrowRequest() {
     const { token,getCookie } = cookie();
     const [requestData, setRequestData] = useState([]);
+    const [borrowedBooks, setBorrowedBooks] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+    
     const env = import.meta.env;
     const serverURL = env.VITE_REACT_SERVER_URL;
 
@@ -35,7 +37,20 @@ function BookBorrowRequest() {
                 console.error(error);
             });
         }
+
+        const handleGetAllborrowedBooks = async()=>{
+            await axios.get(`${serverURL}/api/bookborrowedby/all`, {
+                headers: {
+                    authorization: token,
+                }
+            }).then((res)=>{
+                setBorrowedBooks(res.data)
+            }).catch((error)=>{
+                console.error(error)
+            })
+        }
         handleGetAllRequest();
+        handleGetAllborrowedBooks();
     },[token])
 
     return (
@@ -46,11 +61,21 @@ function BookBorrowRequest() {
             <div className='w-full grid grid-cols-2 gap-2 p-2'>
                 <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-md drop-shadow-md'>
                     <h1 className='text-deepred font-bold text-2xl'>Borrowed books</h1>
-                    <span className='font-medium text-2xl'>20</span>
+                    <span className='font-medium text-2xl'>
+                        {
+                            borrowedBooks ?
+                            borrowedBooks.totalBorrowedBooks:('0')
+                        }
+                    </span>
                 </div>
                 <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-md drop-shadow-md'>
                     <h1 className='text-deepred font-bold text-2xl'>Borrow request</h1>
-                    <span className='font-medium text-2xl'>20</span>
+                    <span className='font-medium text-2xl'>
+                        {
+                            requestData.length > 0 ? 
+                            requestData.length:'0'
+                        }
+                    </span>
                 </div>
             </div>
             <BookBorrowRequestTable

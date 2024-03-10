@@ -24,7 +24,7 @@ function SideNav({isLoading,adminData}) {
                         ):(
                             <>
                                 <img 
-                                    src={data?.profile ? data?.profile:'./imgs/userAlt.png'}
+                                    src={data?.profile ? data?.profile:'/imgs/userAlt.png'}
                                     className='w-[3.3rem] h-[3.3rem] bg-deepred rounded-full'
                                 />
                                 <h1 className='font-medium text-gray-700'>

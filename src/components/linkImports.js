@@ -20,6 +20,7 @@ import RequestInfo from './borrow/RequestInfo'
 import handleGetRequestInformations from "../hooks/handleGetRequestInformations";
 import UserInfoCard from "./cards/UserInfoCard";
 import BookInfoCard from "./cards/BookInfoCard";
+import RequestInformationCard from "./cards/RequestInformationCard";
 
 export {
     RootLayout,
@@ -43,5 +44,6 @@ export {
     RequestInfo,
     handleGetRequestInformations,
     UserInfoCard,
-    BookInfoCard
+    BookInfoCard,
+    RequestInformationCard
 }
