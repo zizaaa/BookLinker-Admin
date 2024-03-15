@@ -21,6 +21,14 @@ import handleGetRequestInformations from "../hooks/handleGetRequestInformations"
 import UserInfoCard from "./cards/UserInfoCard";
 import BookInfoCard from "./cards/BookInfoCard";
 import RequestInformationCard from "./cards/RequestInformationCard";
+import ExtensionRequest from "../pages/ExtensionRequest";
+import ExtensionRequestTable from "./tables/ExtensionRequestTable";
+import ExtentionList from "./extension/ExtentionList";
+import ExtensionRequestInfo from "./extension/ExtensionRequestInfo";
+import getBookInfo from "../hooks/getBookInfo";
+import getUserInfo from "../hooks/getUserInfo";
+import getBorrowedBy from "../hooks/getBorrowedBy";
+import ExtensionRequestInfoCard from "./cards/ExtensionRequestInfoCard";
 
 export {
     RootLayout,
@@ -45,5 +53,13 @@ export {
     handleGetRequestInformations,
     UserInfoCard,
     BookInfoCard,
-    RequestInformationCard
+    RequestInformationCard,
+    ExtensionRequest,
+    ExtensionRequestTable,
+    ExtentionList,
+    ExtensionRequestInfo,
+    getBookInfo,
+    getUserInfo,
+    getBorrowedBy,
+    ExtensionRequestInfoCard
 }

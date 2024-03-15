@@ -39,11 +39,26 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
             case '3D':
                 daysToAdd = 3;
                 break;
+            case '4D':
+                daysToAdd = 4;
+                break;
+            case '5D':
+                daysToAdd = 5;
+                break;
+            case '6D':
+                daysToAdd = 6;
+                break;
             case '1W':
-                daysToAdd = 7; // 1 week is 7 days
+                daysToAdd = 7;
                 break;
             case '2W':
-                daysToAdd = 14; // 2 weeks is 14 days
+                daysToAdd = 14;
+                break;
+            case '3W':
+                daysToAdd = 21;
+                break;
+            case '4W':
+                daysToAdd = 28;
                 break;
             case '1M':
                 daysToAdd = 30;
@@ -84,7 +99,7 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
 
     const handleApprove = async()=>{
         setIsButtongLoading(true);
-        console.log('click')
+
         if(!returnDate || returnDate === 'N/A' || returnDate === ''){
             setIsButtongLoading(false);
             toastError('Please select a return date');
@@ -131,7 +146,7 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
 
     return (
         <div className='p-5'>
-            <div className='grid grid-cols-2 gap-3'>
+            <div className='grid grid-cols-2 max-[500px]:grid-cols-1 gap-3'>
                 <div className='flex flex-col gap-2'>
                     <div className='flex flex-col'>
                         <span className='font-medium text-gray-900 '>
@@ -175,7 +190,7 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
                 <div>
                     <div className='flex flex-col break-all'>
                         <span className='font-medium text-gray-900 '>Reason: </span>
-                        <p className=' bg-cream p-2 rounded-sm text-sm max-h-60 overflow-auto'>
+                        <p className=' bg-cream p-2 rounded-sm text-sm min-h-32 max-h-60 overflow-auto'>
                             {requestInfo.reason}
                         </p>
                     </div>
@@ -204,7 +219,6 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
                                     <option value="2W">2 weeks</option>
                                     <option value="3W">3 weeks</option>
                                     <option value="4W">4 weeks</option>
-                                    <option value="5W">5 weeks</option>
                                     <option value="1M">1 month</option>
                                 </select>
                             </form>

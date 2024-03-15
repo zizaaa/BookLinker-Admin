@@ -10,7 +10,7 @@ function UserInfoCard({requestInfo,serverURL}) {
                     loading='lazy'
                 />
                 <h1 className='font-medium'>
-                    {requestInfo.name}
+                    {requestInfo.name ? requestInfo.name:`${requestInfo.firstName} ${requestInfo.lastName}`}
                 </h1>
                 <span className='text-sm absolute top-1 right-2 font-medium'>
                     Lvl {requestInfo.level}
@@ -64,7 +64,7 @@ function UserInfoCard({requestInfo,serverURL}) {
                     <span className='font-medium'>
                         Email: 
                     </span>
-                    {requestInfo.email}
+                    {typeof requestInfo.email === 'object' ? requestInfo.email.email : requestInfo.email}
                 </div>
             </div>
         </div>

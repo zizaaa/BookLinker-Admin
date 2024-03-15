@@ -7,8 +7,11 @@ import {
         UserInfoCard, 
         admin, 
         axios, cookie, 
+        getBookInfo, 
+        getBorrowedBy, 
         handleGetRequestInformations, 
 } from '../linkImports';
+import { FaArrowLeft } from '../icons'
 import { ToastContainer } from 'react-toastify';
 
 function RequestInfo() {
@@ -57,38 +60,33 @@ function RequestInfo() {
         }
         const handeGetBookInfo = async(bookId)=>{
             //get book information
-            await axios.get(`${serverURL}/api/booklinker/getSingleBook/${bookId}`,{
-                headers:{
-                    Authorization:token
+            await getBookInfo(serverURL,bookId,token)
+            .then((res)=>{
+                setBookInfo(res)
+
+                if(res.borrowedBy){
+                    handleGetBorrowedByCollection(res.borrowedBy)
+                }else{
+                    setBookBorrowedBy([])
+                    setIsLoading(false);
                 }
-            }).then((res)=>{
-                setBookInfo(res.data.book)
                 
-                    if(res.data.book.borrowedBy){
-                        handleGetBorrowedByCollection(res.data.book.borrowedBy)
-                    }else{
-                        setBookBorrowedBy([])
-                        setIsLoading(false);
-                    }
-                    
             }).catch((error)=>{
                 navigate('/book-borrow/request');
-                throw error;
+                console.error(error);
             })
         }
         
         const handleGetBorrowedByCollection = async(id)=>{
-            await axios.get(`${serverURL}/api/bookborrowedby/get/${id}`,{
-                headers:{
-                    Authorization:token
-                }
-            }).then((res)=>{
-                setBookBorrowedBy(res.data)
+            await getBorrowedBy(serverURL,id,token)
+            .then((res)=>{
+                setBookBorrowedBy(res)
                 setIsLoading(false);
             }).catch((error)=>{
                 navigate('/book-borrow/request');
                 throw error;
             })
+            
         }
         handleRequestInformation();
 
@@ -97,7 +95,13 @@ function RequestInfo() {
     return (
         <div className='w-full overflow-hidden'>
             <ToastContainer/>
-            <div className='grid grid-cols-2 p-2 gap-2'>
+            <button 
+                className='p-2 rounded-full text-xl text-gray-800 font-medium mt-2'
+                onClick={()=>{navigate('/book-borrow/request')}}
+            >
+                <FaArrowLeft/>
+            </button>
+            <div className='grid grid-cols-2 max-[890px]:grid-cols-1 p-2 gap-2'>
                 <div className='bg-sandstone rounded-md drop-shadow-md'>
                     <div className='w-full bg-deepred text-white font-medium p-2 text-center rounded-t-md'>
                         <h1>Borrower Information</h1>

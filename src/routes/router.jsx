@@ -9,7 +9,10 @@ import {
         LogedIn, 
         BookBorrow, 
         BookBorrowRequest ,
-        RequestInfo
+        RequestInfo,
+        ExtensionRequest,
+        ExtentionList,
+        ExtensionRequestInfo
     } from "../components/linkImports";
 
 export const router = createBrowserRouter([
@@ -40,6 +43,20 @@ export const router = createBrowserRouter([
                     {
                         path:'/book-borrow/request/:collectionID/:borrowerID/:requestID',
                         element:<RequestInfo/>
+                    }
+                ]
+            },
+            {
+                path:'extension-request',
+                element:<ExtensionRequest/>,
+                children:[
+                    {
+                        path:'/extension-request/list',
+                        element:<ExtentionList/>
+                    },
+                    {
+                        path:'/extension-request/list/:requestID',
+                        element:<ExtensionRequestInfo/>
                     }
                 ]
             },

@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import { Link, NavLink } from 'react-router-dom'
-import { GrAnalytics,FaUser,GiBookshelf,HiOutlineInboxIn,FaBook,IoMdSwap,CgProfile,IoExitOutline } from '../icons'
+import { 
+    GrAnalytics,
+    FaUser,
+    GiBookshelf,
+    HiOutlineInboxIn,
+    FaBook,
+    IoMdSwap,
+    CgProfile,
+    IoExitOutline, 
+    SiGitextensions,
+} from '../icons'
 import { Spinner } from '../linkImports'
 
-function SideNav({isLoading,adminData}) {
+function SideNav({isLoading,adminData,setHandleShowNav}) {
     const [data, setData] = useState({});
     useEffect(()=>{
 
@@ -13,7 +23,7 @@ function SideNav({isLoading,adminData}) {
 
     },[isLoading,adminData])
     return (
-        <div className='w-[25rem] bg-sandstone py-5 px-10 overflow-auto'>
+        <div className='bg-sandstone py-5 px-10'>
                 <div className='flex flex-row items-center gap-2 p-2 border-b border-[rgb(223,207,188)]'>
                     {
                         isLoading ?
@@ -37,6 +47,7 @@ function SideNav({isLoading,adminData}) {
                 <NavLink 
                     to='/' 
                     className={({isActive}) => isActive ? 'flex flex-row items-center p-2 mt-3 rounded-sm bg-deepred':'group flex flex-row items-center p-2 mt-3 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                    onClick={()=>{setHandleShowNav(false)}}
                 >
                     {({ isActive }) => (
                         <>
@@ -56,6 +67,7 @@ function SideNav({isLoading,adminData}) {
                 <NavLink
                     to='/inbox'
                     className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                    onClick={()=>{setHandleShowNav(false)}}
                 >
                     {({ isActive }) => (
                         <>
@@ -79,6 +91,7 @@ function SideNav({isLoading,adminData}) {
                     <NavLink
                         to='/student'
                         className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
                     >
                         {({ isActive }) => (
                             <>
@@ -98,6 +111,7 @@ function SideNav({isLoading,adminData}) {
                     <NavLink
                         to='/faculty'
                         className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
                     >
                         {({ isActive }) => (
                             <>
@@ -118,6 +132,7 @@ function SideNav({isLoading,adminData}) {
                     <NavLink
                         to='/books'
                         className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
                     >
                         {({ isActive }) => (
                             <>
@@ -143,6 +158,7 @@ function SideNav({isLoading,adminData}) {
                     <NavLink 
                         to='/book-borrow/request'
                         className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
                     >
                         {({ isActive }) => (
                             <>
@@ -160,9 +176,31 @@ function SideNav({isLoading,adminData}) {
                         )}
                         
                     </NavLink>
+                    <NavLink 
+                        to=''
+                        className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
+                    >
+                        {({ isActive }) => (
+                            <>
+                                <span 
+                                    className={isActive ? 'text-[1.2rem] text-white':'text-[1.2rem] text-gray-700 group-hover:text-white transition-all duration-200'}
+                                >
+                                    <FaBook/>
+                                </span>
+                                <span 
+                                    className={isActive ? 'ms-3 text-[1.2rem] text-white':'ms-3 text-[1.2rem] text-gray-700 group-hover:text-white transition-all duration-200'}
+                                >
+                                    Book reservation
+                                </span>
+                            </>
+                        )}
+                        
+                    </NavLink>
                     <NavLink
                         to='/swap-request'
                         className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
                     >
                         {({ isActive }) => (
                             <>
@@ -178,7 +216,26 @@ function SideNav({isLoading,adminData}) {
                                 </span>
                             </>
                         )}
-
+                    </NavLink>
+                    <NavLink
+                        to='/extension-request/list'
+                        className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
+                    >
+                        {({ isActive }) => (
+                            <>
+                                <span 
+                                    className={isActive ? 'text-[1.2rem] text-white':'text-[1.2rem] text-gray-700 group-hover:text-white transition-all duration-200'}
+                                >
+                                    <SiGitextensions/>
+                                </span>
+                                <span 
+                                    className={isActive ? 'ms-3 text-[1.2rem] text-white':'ms-3 text-[1.2rem] text-gray-700 group-hover:text-white transition-all duration-200'}
+                                >
+                                    Extension request
+                                </span>
+                            </>
+                        )}
                     </NavLink>
                 </div>
                 <div className=''>
@@ -188,6 +245,7 @@ function SideNav({isLoading,adminData}) {
                     <NavLink 
                         to='/profile'
                         className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
+                        onClick={()=>{setHandleShowNav(false)}}
                     >
                         {({ isActive }) => (
                             <>

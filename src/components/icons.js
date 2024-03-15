@@ -8,6 +8,11 @@ import { FaBook } from "react-icons/fa";
 import { IoMdSwap } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { IoExitOutline } from "react-icons/io5";
+import { SiGitextensions } from "react-icons/si";
+import { FaArrowLeft } from "react-icons/fa6";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { RxCross2 } from "react-icons/rx";
+
 
 export {
     RiAdminFill,
@@ -19,5 +24,9 @@ export {
     FaBook,
     IoMdSwap,
     CgProfile,
-    IoExitOutline
+    IoExitOutline,
+    SiGitextensions,
+    FaArrowLeft,
+    GiHamburgerMenu,
+    RxCross2
 }
