@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Spinner,handleGetRequestInformations } from '../linkImports'
+import { Spinner, handleGetRequestInformations } from '../linkImports';
 import { Link } from 'react-router-dom';
 
-function BookBorrowRequestTable({requestData,isLoading}) {
+function BookReservationTable({requestData,isLoading,setReservationData}) {
     const [information, setInformation] = useState([]);
+    const [reservationFilter, setReservationFilter] = useState('status');
 
     const formatDate = (timestamp) => {
         const date = new Date(timestamp);
@@ -15,7 +16,7 @@ function BookBorrowRequestTable({requestData,isLoading}) {
     
     useEffect(()=>{
         const handleApi = async (collectionID, borrowerID, requestID) => {
-            return await handleGetRequestInformations(collectionID, borrowerID, requestID, 'borrow')
+            return await handleGetRequestInformations(collectionID, borrowerID, requestID, 'reservation')
         };
     
         const handleGetRequestInformation = async () => {
@@ -24,6 +25,7 @@ function BookBorrowRequestTable({requestData,isLoading}) {
                 const responses = await Promise.all(apiCalls);
                 responses.reverse()
                 setInformation(responses);
+                setReservationData(responses)
             } catch (error) {
                 console.error(error)
             }
@@ -38,9 +40,27 @@ function BookBorrowRequestTable({requestData,isLoading}) {
                 !isLoading ? 
                 (
                     <div className='w-full h-[28rem] overflow-auto mt-2 p-2'>
+                        <div className='flex items-center justify-end bg-cream p-2 gap-2 rounded-sm'>
+                            <h1 className='font-medium'>Filter by:</h1>
+                            <div className='w-28'>
+                                <select 
+                                    id="category" 
+                                    className="bg-sandstone border border-none text-gray-900 text-sm rounded-sm focus:ring-transparent focus:border-none block w-full p-2.5 "
+                                    value={reservationFilter}
+                                    onChange={(e)=>{setReservationFilter(e.target.value)}}
+                                >
+                                    <option value="status">Status</option>
+                                    <option value="Pending">Pending</option>
+                                    <option value="Approved">Approved</option>
+                                </select>
+                            </div>
+                        </div>
                         <table className="w-full text-sm text-left rtl:text-right text-gray-500">
                             <thead className="text-xs text-gray-700 uppercase bg-transparent">
                                 <tr>
+                                    <th scope="col" className="px-3 py-3">
+                                        Status
+                                    </th>
                                     <th scope="col" className="px-3 py-3">
                                         Requestor name
                                     </th>
@@ -63,8 +83,25 @@ function BookBorrowRequestTable({requestData,isLoading}) {
                                         information.length > 0 ?
                                         (
                                             information
+                                            .filter(item => reservationFilter === 'status' || item.status === reservationFilter)
                                             .map((data,index)=>(
                                                 <tr className="odd:bg-cream even:bg-transparent" key={index}>
+                                                    <th scope="row" className="px-3 py-2 font-medium text-gray-900 whitespace-nowrap">
+                                                        {
+                                                            data.status === 'Pending' ?
+                                                            (
+                                                                <span className="inline-flex items-center bg-yellow-100 text-yellow-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                                                    <span className="w-2 h-2 me-1 bg-yellow-500 rounded-full"></span>
+                                                                    Pending
+                                                                </span>
+                                                            ):(
+                                                                <span className="inline-flex items-center bg-green-300 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">
+                                                                    <span className="w-2 h-2 me-1 bg-green-500 rounded-full"></span>
+                                                                    Approved
+                                                                </span>
+                                                            )
+                                                        }
+                                                    </th>
                                                     <th scope="row" className="px-3 py-2 font-medium text-gray-900 whitespace-nowrap">
                                                         {
                                                             data.name
@@ -84,7 +121,7 @@ function BookBorrowRequestTable({requestData,isLoading}) {
                                                         }
                                                     </td>
                                                     <td className="px-3 py-2">
-                                                        <Link to={`/book-borrow/request/${data.collectionID}/${data.borrowerID}/${data.requestID}`}>View request</Link>
+                                                        <Link to={`/reservation-request/list/${data.collectionID}/${data.borrowerID}/${data.requestID}`}>View request</Link>
                                                     </td>
                                                 </tr>
                                             ))
@@ -94,6 +131,7 @@ function BookBorrowRequestTable({requestData,isLoading}) {
                                             </tr>
                                         )
                                     }
+                                    
                                 </tbody>
                         </table>
                     </div>
@@ -107,4 +145,4 @@ function BookBorrowRequestTable({requestData,isLoading}) {
     )
 }
 
-export default BookBorrowRequestTable
+export default BookReservationTable

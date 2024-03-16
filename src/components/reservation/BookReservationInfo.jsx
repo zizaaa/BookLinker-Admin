@@ -2,11 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom';
 import { 
         BookInfoCard, 
-        RequestInformationCard, 
+        ReservationInfoCard, 
         Spinner, 
         UserInfoCard, 
         admin, 
-        axios, cookie, 
+        cookie, 
         getBookInfo, 
         getBorrowedBy, 
         handleGetRequestInformations, 
@@ -14,7 +14,7 @@ import {
 import { FaArrowLeft } from '../icons'
 import { ToastContainer } from 'react-toastify';
 
-function RequestInfo() {
+function BookReservationInfo() {
     const { collectionID, borrowerID, requestID } = useParams();
     const { token,getCookie } = cookie();
     const { adminData,getAdminAccount } = admin();
@@ -22,6 +22,7 @@ function RequestInfo() {
     const [bookInfo, setBookInfo] = useState({});
     const [bookBorrowedBy, setBookBorrowedBy] = useState({});
     const [isLoading, setIsLoading] = useState(false);
+    const [changeNotifier, setChangeNotifier] = useState(false);
 
     const navigate = useNavigate();
     const env = import.meta.env;
@@ -40,7 +41,7 @@ function RequestInfo() {
         setIsLoading(true)
 
         if(!collectionID || !borrowerID || !requestID){
-            return navigate('/book-borrow/request');
+            return navigate('/reservation-request/list');
         }
 
         if(!token || !adminData){
@@ -48,12 +49,12 @@ function RequestInfo() {
         }
 
         const handleRequestInformation = async()=>{
-            await handleGetRequestInformations(collectionID,borrowerID,requestID, 'borrow')
+            await handleGetRequestInformations(collectionID,borrowerID,requestID, 'reservation')
             .then((res)=>{
                 setRequestInfo(res)
                 handeGetBookInfo(res.bookId)
             }).catch((error)=>{
-                navigate('/book-borrow/request');
+                navigate('/reservation-request/list');
                 throw error;
             })
             
@@ -72,7 +73,7 @@ function RequestInfo() {
                 }
                 
             }).catch((error)=>{
-                navigate('/book-borrow/request');
+                navigate('/reservation-request/list');
                 console.error(error);
             })
         }
@@ -83,21 +84,21 @@ function RequestInfo() {
                 setBookBorrowedBy(res)
                 setIsLoading(false);
             }).catch((error)=>{
-                navigate('/book-borrow/request');
+                navigate('/reservation-request/list');
                 throw error;
             })
             
         }
         handleRequestInformation();
 
-    },[collectionID, borrowerID, requestID,token,adminData])
+    },[collectionID, borrowerID, requestID,token,adminData,changeNotifier])
 
     return (
         <div className='w-full overflow-hidden'>
             <ToastContainer/>
             <button 
                 className='p-2 rounded-full text-xl text-gray-800 font-medium mt-2'
-                onClick={()=>{navigate('/book-borrow/request')}}
+                onClick={()=>{navigate('/reservation-request/list')}}
             >
                 <FaArrowLeft/>
             </button>
@@ -143,10 +144,10 @@ function RequestInfo() {
 
             <div className='mt-5 bg-sandstone rounded-md'>
                 <div className='w-full bg-deepred text-white font-medium p-2 text-center rounded-t-md'>
-                    <h1>Borrow Request</h1>
+                    <h1>Reservation Request</h1>
                 </div>
 
-                <RequestInformationCard
+                <ReservationInfoCard
                     requestInfo={requestInfo}
                     serverURL={serverURL}
                     bookBorrowedBy={bookBorrowedBy}
@@ -154,10 +155,12 @@ function RequestInfo() {
                     adminData={adminData}
                     token={token}
                     collectionID={collectionID}
+                    changeNotifier={changeNotifier}
+                    setChangeNotifier={setChangeNotifier}
                 />
             </div>
         </div>
     )
 }
 
-export default RequestInfo
+export default BookReservationInfo

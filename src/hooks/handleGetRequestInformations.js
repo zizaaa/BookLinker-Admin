@@ -1,7 +1,7 @@
 import { axios } from '../components/linkImports'
 import Cookies from 'js-cookie';
 
-const handleGetRequestInformations = async(collectionID,borrowerID,requestID)=>{
+const handleGetRequestInformations = async(collectionID,borrowerID,requestID,type)=>{
     try {
         const env = import.meta.env;
         const serverURL = env.VITE_REACT_SERVER_URL;
@@ -11,7 +11,8 @@ const handleGetRequestInformations = async(collectionID,borrowerID,requestID)=>{
             params: {
                 collectionID,
                 borrowerID,
-                requestID
+                requestID,
+                type
             },
             headers:{
                 Authorization:token

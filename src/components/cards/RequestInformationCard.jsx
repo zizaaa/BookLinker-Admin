@@ -198,10 +198,8 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
                         <div className='w-full bg-deepred text-white font-medium p-2 text-center rounded-t-md'>
                             <h1>Action</h1>
                         </div>
-
                         <div className='w-full p-3'>
                             <form>
-
                                 <select 
                                     id="countries" 
                                     className="bg-sandstone text-gray-900 text-sm rounded-sm border-none outline-none focus:outline-none focus:border-none focus:ring-transparent w-full"
@@ -225,7 +223,7 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
                         </div>
                         <div className='flex w-full items-center justify-end gap-3 p-3'>
                             <button 
-                                className='w-24 py-2 bg-deepred text-white rounded-md drop-shadow-md'
+                                className='flex-1 py-2 bg-deepred text-white rounded-md drop-shadow-md'
                                 onClick={handleReject}
                             >
                                 {
@@ -238,7 +236,7 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
                                 }
                             </button>
                             <button 
-                                className={`w-24 py-2 bg-green-600 text-white rounded-md drop-shadow-md ${isButtonLoading ? 'cursor-not-allowed':!bookBorrowedBy.totalQuantity ?requestInfo.quantity > bookInfo.quantity ? 'cursor-not-allowed':'cursor-pointer':bookBorrowedBy.totalQuantity + requestInfo.quantity > bookInfo.quantity ? 'cursor-not-allowed':'cursor-pointer'}`}
+                                className={`flex-1 py-2 bg-green-600 text-white rounded-md drop-shadow-md ${isButtonLoading ? 'cursor-not-allowed':!bookBorrowedBy.totalQuantity ?requestInfo.quantity > bookInfo.quantity ? 'cursor-not-allowed':'cursor-pointer':bookBorrowedBy.totalQuantity + requestInfo.quantity > bookInfo.quantity ? 'cursor-not-allowed':'cursor-pointer'}`}
                                 onClick={handleApprove}
                                 disabled={isButtonLoading || !bookBorrowedBy.totalQuantity ? requestInfo.quantity > bookInfo.quantity:bookBorrowedBy.totalQuantity + requestInfo.quantity > bookInfo.quantity}
                             >

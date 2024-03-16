@@ -29,6 +29,11 @@ import getBookInfo from "../hooks/getBookInfo";
 import getUserInfo from "../hooks/getUserInfo";
 import getBorrowedBy from "../hooks/getBorrowedBy";
 import ExtensionRequestInfoCard from "./cards/ExtensionRequestInfoCard";
+import Reservation from "../pages/Reservation";
+import BookReservationRequest from "./reservation/BookReservationRequest";
+import BookReservationTable from "./tables/BookReservationTable";
+import BookReservationInfo from "./reservation/BookReservationInfo";
+import ReservationInfoCard from "./cards/ReservationInfoCard";
 
 export {
     RootLayout,
@@ -61,5 +66,10 @@ export {
     getBookInfo,
     getUserInfo,
     getBorrowedBy,
-    ExtensionRequestInfoCard
+    ExtensionRequestInfoCard,
+    Reservation,
+    BookReservationRequest,
+    BookReservationTable,
+    BookReservationInfo,
+    ReservationInfoCard
 }
