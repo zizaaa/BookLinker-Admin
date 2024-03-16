@@ -12,7 +12,10 @@ import {
         RequestInfo,
         ExtensionRequest,
         ExtentionList,
-        ExtensionRequestInfo
+        ExtensionRequestInfo,
+        Reservation,
+        BookReservationRequest,
+        BookReservationInfo
     } from "../components/linkImports";
 
 export const router = createBrowserRouter([
@@ -60,6 +63,20 @@ export const router = createBrowserRouter([
                     }
                 ]
             },
+            {
+                path:'reservation-request',
+                element:<Reservation/>,
+                children:[
+                    {
+                        path:'/reservation-request/list',
+                        element:<BookReservationRequest/>
+                    },
+                    {
+                        path:'/reservation-request/list/:collectionID/:borrowerID/:requestID',
+                        element:<BookReservationInfo/>
+                    }
+                ]
+            }
         ]
     },
     {

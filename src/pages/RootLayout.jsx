@@ -23,8 +23,8 @@ function RootLayout() {
                 handleShowNav={handleShowNav}
                 setHandleShowNav={setHandleShowNav}
             />
-            <section className='w-full flex flex-row h-[85.4vh] max-[800px]:h-[81.7vh] max-[300px]:h-[88.3vh] overflow-hidden relative'>
-                <div className={`w-[20rem] max-[300px]:w-auto overflow-auto absolute z-10 top-0 bottom-0 max-[300px]:left-0 max-[300px]:right-0 transition-all duration-200 ${handleShowNav ? 'max-[800px]:translate-x-0':'max-[800px]:-translate-x-96'}`}>
+            <section className='w-full flex flex-row h-full overflow-hidden relative'>
+                <div className={`w-[20rem] max-[300px]:w-auto overflow-auto absolute z-10 max-[300px]:left-0 max-[300px]:right-0 transition-all duration-200 ${handleShowNav ? 'max-[800px]:translate-x-0':'max-[800px]:-translate-x-96'}`}>
                     <SideNav
                         isLoading={isLoading}
                         adminData={adminData}
