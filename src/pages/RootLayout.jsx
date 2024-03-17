@@ -24,14 +24,14 @@ function RootLayout() {
                 setHandleShowNav={setHandleShowNav}
             />
             <section className='w-full flex flex-row h-full overflow-hidden relative'>
-                <div className={`w-[20rem] max-[300px]:w-auto overflow-auto absolute z-10 max-[300px]:left-0 max-[300px]:right-0 transition-all duration-200 ${handleShowNav ? 'max-[800px]:translate-x-0':'max-[800px]:-translate-x-96'}`}>
+                <div className={`w-[20rem] max-[300px]:w-auto overflow-auto absolute top-0 bottom-0 z-10 max-[300px]:left-0 max-[300px]:right-0 transition-all duration-200 ${handleShowNav ? 'max-[800px]:translate-x-0':'max-[800px]:-translate-x-96'}`}>
                     <SideNav
                         isLoading={isLoading}
                         adminData={adminData}
                         setHandleShowNav={setHandleShowNav}
                     />
                 </div>
-                <div className='p-5 w-full overflow-auto ps-[22rem] max-[800px]:ps-5 max-[500px]:p-1 transition-all duration-200'>
+                <div className='p-5 w-full overflow-auto ps-[22rem] max-[800px]:ps-5 max-[500px]:p-1 transition-all duration-200 h-[85.4vh]'>
                     <Outlet/>
                 </div>
             </section>
