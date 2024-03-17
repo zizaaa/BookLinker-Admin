@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { axios, Spinner, toastError } from '../linkImports'
+import { axios, sendAndApproveBook, Spinner, toastError } from '../linkImports'
 import { useNavigate } from 'react-router-dom';
 
 function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,adminData,token,collectionID}) {
@@ -106,42 +106,72 @@ function RequestInformationCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,a
             return
         }
 
-        try {
-            await axios.post(`${serverURL}/api/booklinker/bookHistory/add`,{
-                bookId:requestInfo.bookId,
-                borrowerID:requestInfo.borrowerID,
-                bookRequestID:requestInfo.bookRequestID,
-                borrowedByData:{
-                    userId:requestInfo.userID,
-                    bookId:requestInfo.bookId,
-                    quantity:requestInfo.quantity,
-                    borrowedDate:new Date(),
-                    returnDate:returnTimestamp,
-                    bookReturnDate:'TBA'
-                },
-                userStatus:{
-                    status:'Approved',
-                    permittedBy:adminData.position,
-                    collectionID,
-                    requestId:requestInfo.id,
-                    borrowedDate:new Date(),
-                    returnDate:returnTimestamp
-                }
-            },{
-                headers:{
-                    Authorization:token
-                }
-            }).then(()=>{
-                setIsButtongLoading(false);
-                navigate('/book-borrow/request');
-            }).catch((error)=>{
-                console.error(error)
-                navigate('/book-borrow/request');
-            });
-        } catch (error) {
-            console.error(error);
+        await sendAndApproveBook(
+            serverURL, // Server URL
+            token, // Authorization token
+            requestInfo.bookId, // Book ID
+            requestInfo.borrowerID, // Borrower ID
+            requestInfo.bookRequestID, // Book Request ID
+            { // Borrowed by data
+                userId: requestInfo.userID,
+                bookId: requestInfo.bookId,
+                quantity: requestInfo.quantity,
+                borrowedDate: new Date(),
+                returnDate: returnTimestamp,
+                bookReturnDate: 'TBA'
+            },
+            { // User status
+                status: 'Approved',
+                permittedBy: adminData.position,
+                collectionID,
+                requestId: requestInfo.id,
+                borrowedDate: new Date(),
+                returnDate: returnTimestamp
+            },
+            'borrow' // Type
+        ).then(()=>{
+            setIsButtongLoading(false);
             navigate('/book-borrow/request');
-        }
+        }).catch((error)=>{
+            console.error(error)
+            navigate('/book-borrow/request');
+        });
+        // try {
+        //     await axios.post(`${serverURL}/api/booklinker/bookHistory/add`,{
+        //         bookId:requestInfo.bookId,
+        //         borrowerID:requestInfo.borrowerID,
+        //         bookRequestID:requestInfo.bookRequestID,
+        //         borrowedByData:{
+        //             userId:requestInfo.userID,
+        //             bookId:requestInfo.bookId,
+        //             quantity:requestInfo.quantity,
+        //             borrowedDate:new Date(),
+        //             returnDate:returnTimestamp,
+        //             bookReturnDate:'TBA'
+        //         },
+        //         userStatus:{
+        //             status:'Approved',
+        //             permittedBy:adminData.position,
+        //             collectionID,
+        //             requestId:requestInfo.id,
+        //             borrowedDate:new Date(),
+        //             returnDate:returnTimestamp
+        //         }
+        //     },{
+        //         headers:{
+        //             Authorization:token
+        //         }
+        //     }).then(()=>{
+        //         setIsButtongLoading(false);
+        //         navigate('/book-borrow/request');
+        //     }).catch((error)=>{
+        //         console.error(error)
+        //         navigate('/book-borrow/request');
+        //     });
+        // } catch (error) {
+        //     console.error(error);
+        //     navigate('/book-borrow/request');
+        // }
     }
 
     return (

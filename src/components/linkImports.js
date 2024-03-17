@@ -34,6 +34,7 @@ import BookReservationRequest from "./reservation/BookReservationRequest";
 import BookReservationTable from "./tables/BookReservationTable";
 import BookReservationInfo from "./reservation/BookReservationInfo";
 import ReservationInfoCard from "./cards/ReservationInfoCard";
+import sendAndApproveBook from "../hooks/sendAndApproveBook";
 
 export {
     RootLayout,
@@ -71,5 +72,6 @@ export {
     BookReservationRequest,
     BookReservationTable,
     BookReservationInfo,
-    ReservationInfoCard
+    ReservationInfoCard,
+    sendAndApproveBook
 }

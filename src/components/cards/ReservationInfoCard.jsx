@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { axios, Spinner, toastError } from '../linkImports'
+import { axios, sendAndApproveBook, Spinner, toastError } from '../linkImports'
 import { useNavigate } from 'react-router-dom';
 
 function ReservationInfoCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,adminData,token,collectionID,changeNotifier,setChangeNotifier}) {
@@ -7,6 +7,7 @@ function ReservationInfoCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,admi
     const [returnTimestamp, setReturnTimestamp] = useState(null);
     const [isButtonLoading, setIsButtongLoading] = useState(false);
     const [isRejectButtonLoading, setIsRejectButtonLoading] = useState(false);
+    const [isSendBookLoading, setIsSendBookLoading] = useState(false);
 
     const navigate = useNavigate();
     const formatDate = (timestamp) => {
@@ -117,6 +118,47 @@ function ReservationInfoCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,admi
         setIsButtongLoading(false);
     }
 
+    const handleSendBook = async()=>{
+
+        setIsSendBookLoading(true)
+
+        if(!returnDate || returnDate === 'N/A' || returnDate === ''){
+            setIsSendBookLoading(false);
+            toastError('Please select a return date');
+            return
+        }
+
+        await sendAndApproveBook(
+            serverURL, // Server URL
+            token, // Authorization token
+            requestInfo.bookId, // Book ID
+            requestInfo.borrowerID, // Borrower ID
+            requestInfo.bookRequestID, // Book Request ID
+            { // Borrowed by data
+                userId: requestInfo.userID,
+                bookId: requestInfo.bookId,
+                quantity: requestInfo.quantity,
+                borrowedDate: new Date(),
+                returnDate: returnTimestamp,
+                bookReturnDate: 'TBA'
+            },
+            { // User status
+                status: 'Approved',
+                permittedBy: adminData.position,
+                collectionID,
+                requestId: requestInfo.id,
+                borrowedDate: new Date(),
+                returnDate: returnTimestamp
+            },
+            'reservation' // Type
+        ).then(()=>{
+            setIsSendBookLoading(false);
+            navigate('/reservation-request/list')
+        }).catch((error)=>{
+            console.error(error)
+            navigate('/reservation-request/list')
+        });
+    }
     // const handleApprove = async()=>{
     //     setIsButtongLoading(true);
 
@@ -282,9 +324,18 @@ function ReservationInfoCard({requestInfo,serverURL,bookBorrowedBy,bookInfo,admi
                                     </>
                                 ):(
                                     <button 
-                                        className='flex-1 py-2 bg-green-600 text-white rounded-md drop-shadow-md'
+                                        onClick={handleSendBook}
+                                        className={`flex-1 py-2 bg-green-600 text-white rounded-md drop-shadow-md ${isButtonLoading ? 'cursor-not-allowed':!bookBorrowedBy.totalQuantity ?requestInfo.quantity > bookInfo.quantity ? 'cursor-not-allowed':'cursor-pointer':bookBorrowedBy.totalQuantity + requestInfo.quantity > bookInfo.quantity ? 'cursor-not-allowed':'cursor-pointer'}`}
+                                        disabled={isButtonLoading || !bookBorrowedBy.totalQuantity ? requestInfo.quantity > bookInfo.quantity:bookBorrowedBy.totalQuantity + requestInfo.quantity > bookInfo.quantity}
                                     >
-                                        Send book
+                                        {
+                                            isSendBookLoading ?
+                                            (
+                                                <div className='w-full flex justify-center items-center'>
+                                                    <Spinner/>
+                                                </div>
+                                            ):('Send book')
+                                        }
                                     </button>
                                 )
                             }
