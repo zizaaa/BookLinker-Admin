@@ -59,7 +59,7 @@ function BookBorrowRequest() {
                 <h1>Book borrow request</h1>
             </div>
             <div className='w-full grid grid-cols-2 max-[490px]:grid-cols-1 text-center gap-2 p-2'>
-                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-md drop-shadow-md'>
+                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-sm'>
                     <h1 className='text-deepred font-bold text-2xl'>Borrowed books</h1>
                     <span className='font-medium text-2xl'>
                         {
@@ -68,7 +68,7 @@ function BookBorrowRequest() {
                         }
                     </span>
                 </div>
-                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-md drop-shadow-md'>
+                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-sm'>
                     <h1 className='text-deepred font-bold text-2xl'>Borrow request</h1>
                     <span className='font-medium text-2xl'>
                         {

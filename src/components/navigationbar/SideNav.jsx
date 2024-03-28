@@ -198,7 +198,7 @@ function SideNav({isLoading,adminData,setHandleShowNav}) {
                         
                     </NavLink>
                     <NavLink
-                        to='/swap-request'
+                        to='/book-swapping/list'
                         className={({isActive}) => isActive ? 'flex flex-row items-center p-2 rounded-sm bg-deepred':'group flex flex-row items-center p-2 hover:bg-deepred transition-all duration-200 rounded-sm'}
                         onClick={()=>{setHandleShowNav(false)}}
                     >
