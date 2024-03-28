@@ -47,13 +47,13 @@ function ExtentionList() {
                 <h1>Return Date Extension Request</h1>
             </div>
             <div className='w-full grid grid-cols-2 max-[490px]:grid-cols-1 gap-2 p-2'>
-                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-md drop-shadow-md text-center'>
+                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-sm text-center'>
                     <h1 className='text-deepred font-bold text-2xl'>Approved request</h1>
                     <span className='font-medium text-2xl'>
                         {requestList.reduce((count, request) => request.request.status === 'Approved' ? count + 1 : count, 0)}
                     </span>
                 </div>
-                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-md drop-shadow-md text-center'>
+                <div className='flex flex-col items-center justify-center h-32 bg-cream rounded-sm text-center'>
                     <h1 className='text-deepred font-bold text-2xl'>Pending request</h1>
                     <span className='font-medium text-2xl'>
                         {requestList.reduce((count, request) => request.request.status === 'Pending' ? count + 1 : count, 0)}

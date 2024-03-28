@@ -35,6 +35,11 @@ import BookReservationTable from "./tables/BookReservationTable";
 import BookReservationInfo from "./reservation/BookReservationInfo";
 import ReservationInfoCard from "./cards/ReservationInfoCard";
 import sendAndApproveBook from "../hooks/sendAndApproveBook";
+import BookSwappingRequest from "../pages/BookSwappingRequest";
+import BookSwappingRequestHome from "./bookswapping/BookSwappingRequestHome";
+import BookSwappingInformation from "./bookswapping/BookSwappingInformation";
+import BookSwapSender from "./cards/BookSwapSender";
+import BookSwapReceiver from "./cards/BookSwapReceiver";
 
 export {
     RootLayout,
@@ -73,5 +78,10 @@ export {
     BookReservationTable,
     BookReservationInfo,
     ReservationInfoCard,
-    sendAndApproveBook
+    sendAndApproveBook,
+    BookSwappingRequest,
+    BookSwappingRequestHome,
+    BookSwappingInformation,
+    BookSwapSender,
+    BookSwapReceiver
 }

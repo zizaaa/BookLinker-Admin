@@ -120,12 +120,14 @@ function ExtensionRequestInfo() {
     return (
         <div className='w-full overflow-hidden relative'>
             <ToastContainer/>
-            <button 
-                className='p-2 rounded-full text-xl text-gray-800 font-medium mt-2'
-                onClick={()=>{navigate('/extension-request/list')}}
-            >
-                <FaArrowLeft/>
-            </button>
+            <div className='p-2'>
+                <button 
+                    className='text-xl bg-deepred p-[0.4rem] rounded-full text-white opacity-50 hover:opacity-80 transition-all duration-200 z-20'
+                    onClick={()=>{navigate('/extension-request/list')}}
+                >
+                    <FaArrowLeft/>
+                </button>
+            </div>
             <div className='grid grid-cols-2 max-[890px]:grid-cols-1 p-2 gap-2'>
                 <div className='bg-sandstone rounded-md drop-shadow-md'>
                     <div className='w-full bg-deepred text-white font-medium p-2 text-center rounded-t-md'>

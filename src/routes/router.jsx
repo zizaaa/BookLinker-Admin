@@ -15,7 +15,10 @@ import {
         ExtensionRequestInfo,
         Reservation,
         BookReservationRequest,
-        BookReservationInfo
+        BookReservationInfo,
+        BookSwappingRequest,
+        BookSwappingRequestHome,
+        BookSwappingInformation
     } from "../components/linkImports";
 
 export const router = createBrowserRouter([
@@ -74,6 +77,20 @@ export const router = createBrowserRouter([
                     {
                         path:'/reservation-request/list/:collectionID/:borrowerID/:requestID',
                         element:<BookReservationInfo/>
+                    }
+                ]
+            },
+            {
+                path:'book-swapping',
+                element:<BookSwappingRequest/>,
+                children:[
+                    {
+                        path:'/book-swapping/list',
+                        element:<BookSwappingRequestHome/>
+                    },
+                    {
+                        path:'/book-swapping/list/:id',
+                        element:<BookSwappingInformation/>
                     }
                 ]
             }
